@@ -1,5 +1,7 @@
-var express = require('express');
-var app = express();
+'use strict';
+
+let express = require('express');
+let app = express();
 
 app.set('port', (process.argv[2] || 3000));
 app.set('view engine', 'jsx');
@@ -10,8 +12,13 @@ require('babel/register')({
   ignore: false
 });
 
+let data = [
+  { title: 'Shopping', detail: process.argv[3]},
+  { title: 'Hair cut', detail: process.argv[4]}
+];
+
 app.use('/', function(req, res) {
-  res.render('index', '');
+  res.render('index', {data: data});
 });
 
 app.listen(app.get('port'), function() {});
