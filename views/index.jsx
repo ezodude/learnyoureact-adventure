@@ -41,10 +41,13 @@ class Todo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {checked: false};
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
+    console.log('this', this);
     this.setState({checked: e.target.checked});
+    console.log('e.target.checked', e.target.checked);
   }
 
   render() {
