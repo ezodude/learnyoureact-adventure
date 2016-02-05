@@ -5,6 +5,12 @@ import React from 'react';
 let style = {
   tableContent: {
     border: "1px solid black"
+  },
+  checkedTodo: {
+    textDecoration: "line-through"
+  },
+  notCheckedTodo: {
+    textDecoration: "none"
   }
 };
 
@@ -40,19 +46,22 @@ class TodoList extends React.Component {
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {checked: false};
+    this.state = {
+      checked: false,
+      TodoStyle: style.notCheckedTodo
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    console.log('this', this);
-    this.setState({checked: e.target.checked});
-    console.log('e.target.checked', e.target.checked);
+    let checked = e.target.checked;
+    this.setState({ TodoStyle: style[checked ? 'checkedTodo' : 'notCheckedTodo'] });
+    this.setState({checked: checked});
   }
 
   render() {
     return (
-      <tr>
+      <tr style={this.state.TodoStyle}>
         <td style={style.tableContent}>
           <input type="checkbox" checked={this.state.checked} onChange={this.handleChange}/>
         </td>
